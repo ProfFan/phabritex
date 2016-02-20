@@ -8,6 +8,11 @@ First clone the `render2katex` utility [here](https://github.com/ProfFan/render2
 
 Copy all files into the `phabricator` directory and manually patch the conflicting file (to add the KaTeX CSS).
 
+```php
+require_celerity_resource('phriction-document-css'); // Find this line
+require_celerity_resource('katex-css'); // Add this line
+```
+
 Replace the path of `index.js` into the path you installed **render2katex** in the two files in `src/extensions`
 
 Then run `./bin/celerity map` and restart Apache or php5-fpm (for nginx).
@@ -16,7 +21,7 @@ Then run `./bin/celerity map` and restart Apache or php5-fpm (for nginx).
 
 In Phriction wiki:
 
-```
+```latex
 # This is currently a test
 
 {nav Home}
