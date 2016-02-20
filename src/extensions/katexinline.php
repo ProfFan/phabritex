@@ -8,7 +8,7 @@ final class PhabricatorInlineKaTeXRemarkupRule extends PhabricatorRemarkupCustom
 
   public function apply($text) {
     return preg_replace_callback(
-      '@{tex\b((?:[^}\\\\]+|\\\\.)*)}@m',
+      '@{tex\b([^{}]*({[^{}]*?([^{}]|(?R))*[^{}]*?}[^{}]*)*[^{}]*)}@m',
       array($this, 'markupNavigation'),
       $text);
   }
@@ -22,12 +22,12 @@ final class PhabricatorInlineKaTeXRemarkupRule extends PhabricatorRemarkupCustom
     list($err, $stdout, $stderr) = $future->resolve();
 
     if ($err) {
-      return $this->markupError(
+      return
         pht(
           'Execution of `%s` failed (#%d), check your syntax: %s',
           'render2katex',
           $err,
-          $stderr));
+          $stderr);
     }
 
     $result = $stdout;
