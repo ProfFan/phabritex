@@ -19,7 +19,7 @@ Patch `<phabricator>/webroot/rsrc/css/core/remarkup.css`, change the header into
 
 Replace the path of `index.js` into the path you installed **render2katex** in the two files in `src/extensions`
 
-Then run `./bin/celerity map` and restart Apache or php5-fpm (for nginx).
+Then run `<phabricator>/bin/celerity map` and restart Apache or php5-fpm (for nginx).
 
 # Usage
 
