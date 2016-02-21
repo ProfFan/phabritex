@@ -6,11 +6,15 @@ Phabritex is my rough effort for adding LaTeX support into the Phabricator syste
 
 First clone the `render2katex` utility [here](https://github.com/ProfFan/render2katex). Install as guided to somewhere outside the Phabricator directory.
 
-Copy all files into the `phabricator` directory and manually patch the conflicting file (to add the KaTeX CSS).
+Copy all files into the `phabricator` directory and manually patch the one file (to add the KaTeX CSS).
 
-```php
-require_celerity_resource('phriction-document-css'); // Find this line
-require_celerity_resource('katex-css'); // Add this line
+Patch `<phabricator>/webroot/rsrc/css/core/remarkup.css`, change the header into:
+
+```css
+/**
+ * @provides phabricator-remarkup-css
+ * @requires katex-css
+ */
 ```
 
 Replace the path of `index.js` into the path you installed **render2katex** in the two files in `src/extensions`
