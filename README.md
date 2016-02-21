@@ -23,6 +23,8 @@ Then run `./bin/celerity map` and restart Apache or php5-fpm (for nginx).
 
 # Usage
 
+You can use it everywhere with remarkup support :)
+
 In Phriction wiki:
 
 ```latex
@@ -62,7 +64,11 @@ katex {{{
 
 renders into 
 
-![screenshot](https://raw.githubusercontent.com/ProfFan/phabritex/master/2016-02-20.3.12.25.png)
+![screenshot](https://raw.githubusercontent.com/ProfFan/phabritex/master/wiki-demo.png)
+
+and in comments
+
+![screenshot-comment](https://raw.githubusercontent.com/ProfFan/phabritex/master/comments-demo.png)
 
 # License
 
