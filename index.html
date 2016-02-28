@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>PhabriTeX by ProfFan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">PhabriTeX</h1>
+      <h2 class="project-tagline">Add LaTeX support to Phabricator</h2>
+      <a href="https://github.com/ProfFan/phabritex" class="btn">View on GitHub</a>
+      <a href="https://github.com/ProfFan/phabritex/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ProfFan/phabritex/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="phabritex" class="anchor" href="#phabritex" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Phabritex</h1>
+
+<p>Phabritex is my rough effort for adding LaTeX support into the Phabricator system.</p>
+
+<h1>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h1>
+
+<p>First clone the <code>render2katex</code> utility <a href="https://github.com/ProfFan/render2katex">here</a>. Install as guided to somewhere outside the Phabricator directory.</p>
+
+<p>Copy all files into the <code>phabricator</code> directory and manually patch two files (to add the KaTeX CSS).</p>
+
+<p>Patch <code>&lt;phabricator&gt;/webroot/rsrc/css/core/remarkup.css</code>, change the header into:</p>
+
+<div class="highlight highlight-source-css"><pre><span class="pl-c">/**</span>
+<span class="pl-c"> * @provides phabricator-remarkup-css</span>
+<span class="pl-c"> * @requires katex-css</span>
+<span class="pl-c"> */</span></pre></div>
+
+<p>Patch <code>&lt;phabricator&gt;/webroot/rsrc/css/phui/phui-document.css</code>, change the header into:</p>
+
+<div class="highlight highlight-source-css"><pre><span class="pl-c">/**</span>
+<span class="pl-c"> * @provides phui-document-view-css</span>
+<span class="pl-c"> * @requires katex-css</span>
+<span class="pl-c">**/</span></pre></div>
+
+<p>Replace the path of <code>index.js</code> into the path you installed <strong>render2katex</strong> in the two files in <code>src/extensions</code></p>
+
+<p>Then run <code>&lt;phabricator&gt;/bin/celerity map</code> and restart Apache or php5-fpm (for nginx).</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>You can use it everywhere with remarkup support :)</p>
+
+<p>In Phriction wiki:</p>
+
+<div class="highlight highlight-text-tex"><pre># This is currently a test
+
+{nav Home}
+
+The statistical model estimated the probability, {tex <span class="pl-c1">\pi</span>_{i}}, of capturing dolphins on a tow, {tex i}. A year effect, {tex logit(<span class="pl-c1">\pi</span>_i) = <span class="pl-c1">\lambda</span>_{j[i]} + <span class="pl-c1">\sum</span>_c <span class="pl-c1">\beta</span>_c x_{ic}.} was estimated for each year, {tex j}, allowing for annual variation in the capture event rates that was unrelated to the covariates, {tex x}. The contribution of each covariate, indexed by {tex c}, was governed by a regression coefficient, {tex <span class="pl-c1">\beta</span>_c}, that was estimated by the model. The logit transform of the capture event probability was defined as the sum of the year effect, {tex <span class="pl-c1">\lambda</span>}, and the covariates:
+
+katex {{{
+logit(<span class="pl-c1">\pi</span>_i) = <span class="pl-c1">\lambda</span>_{j[i]} + <span class="pl-c1">\sum</span>_c <span class="pl-c1">\beta</span>_c x_{ic}.
+}}}
+determines the result.
+
+# The following is more tests
+
+katex {{{
+f(x) = <span class="pl-c1">\int</span>_{-<span class="pl-c1">\infty</span>}^<span class="pl-c1">\infty</span>
+    <span class="pl-c1">\hat</span> f(<span class="pl-c1">\xi</span>)<span class="pl-cce">\,</span>e^{2 <span class="pl-c1">\pi</span> i <span class="pl-c1">\xi</span> x}
+    <span class="pl-cce">\,</span>d<span class="pl-c1">\xi</span> 
+}}}
+
+katex {{{
+<span class="pl-c1">\begin</span>{bmatrix}
+    a &amp; b <span class="pl-c1">\\</span>
+    c &amp; a 
+    <span class="pl-c1">\end</span>{bmatrix}
+}}}
+
+katex {{{
+<span class="pl-c1">\begin</span>{bmatrix}
+    a &amp; c <span class="pl-c1">\\</span>
+    c &amp; a 
+    <span class="pl-c1">\end</span>{bmatrix}
+}}}</pre></div>
+
+<p>renders into </p>
+
+<p><img src="https://raw.githubusercontent.com/ProfFan/phabritex/master/wiki-demo.png" alt="screenshot"></p>
+
+<p>and in comments</p>
+
+<p><img src="https://raw.githubusercontent.com/ProfFan/phabritex/master/comments-demo.png" alt="screenshot-comment"></p>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<p>MIT</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ProfFan/phabritex">PhabriTeX</a> is maintained by <a href="https://github.com/ProfFan">ProfFan</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
