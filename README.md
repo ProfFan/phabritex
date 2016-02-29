@@ -79,6 +79,10 @@ and in comments
 
 ![screenshot-comment](https://raw.githubusercontent.com/ProfFan/phabritex/master/comments-demo.png)
 
+# Development
+
+Please see this [post](https://blog.amayume.net/adding-latex-support-to-phabricator/) for a through introduction to the codebase.
+
 # License
 
 MIT
