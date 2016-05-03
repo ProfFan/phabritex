@@ -30,6 +30,13 @@ Replace the path of `index.js` into the path you installed **render2katex** in t
 
 Then run `<phabricator>/bin/celerity map` and restart Apache or php5-fpm (for nginx).
 
+# Troubleshooting
+
+First check that you have already restarted everything(nginx, Apache, php daemon, etc.). If it still does not work, try the following (as suggested by @followyourheart):
+
+- `bin/cache purge --purge-all`
+- Disable SELinux or add exceptions
+
 # Usage
 
 You can use it everywhere with remarkup support :)
