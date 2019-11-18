@@ -45,7 +45,7 @@ First check that you have already restarted everything(nginx, Apache, php daemon
 
 # Compatibility
 
-Tested with upstream until 20170117.
+Tested with upstream until 2019/09. Please report compatibility as you update from upstream so I can make the corresponding changes.
 
 # Usage
 
